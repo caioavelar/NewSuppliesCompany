@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import br.newtonpaiva.dominio.*;
 import br.newtonpaiva.dominio.frete.*;
 import br.newtonpaiva.dominio.imposto.*;
@@ -33,13 +35,20 @@ class Main {
     Pedido p = builder.getResultado();*/
     System.out.println(p);
     try {
-      GeradorArquivoXML xml = new GeradorArquivoXML();
-      xml.gerar("teste.xml", p);
+      GeradorArquivo file = new GeradorArquivoXML();
+      file.gerar("teste.xml", p);
 
-    } catch(Exception e) {
+      file = new GeradorArquivoJson();
+      file.gerar("teste.json", p);
+
+      file = new GeradorArquivoXMLCripto();
+      file.gerar("teste.xml.cripto", p);
+
+      file = new GeradorArquivoXMLCompactado();
+      file.gerar("teste.zip", p);
+    }catch(IOException e) {
       e.printStackTrace();
     }
-
 
 /*
     ItemPedido i1 = new ItemPedido();
